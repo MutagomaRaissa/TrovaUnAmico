@@ -1,0 +1,148 @@
+:root {
+  --primary: #2a9d8f;
+  --secondary: #264653;
+  --accent: #e9c46a;
+  --background: #f4f4f4;
+  --text: #222;
+  --radius: 8px;
+  --spacing: 16px;
+  --brown: #8B5C2A;
+}
+
+/* Base styles */
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Top bar and header */
+.top-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--primary);
+  color: #fff;
+  padding: var(--spacing);
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-sizing: border-box;
+}
+
+.top-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.main-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: var(--brown);
+  margin-bottom: 0.1em;
+  line-height: 1.1;
+}
+
+.brown {
+  color: var(--brown) !important;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: #6d4c1b;
+  margin-top: -0.3em;
+  margin-bottom: 0.2em;
+  font-weight: 500;
+}
+
+/* Navigation links */
+.top-links {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.top-link,
+.btn {
+  background: var(--secondary);
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.top-link:hover,
+.btn:hover {
+  background: var(--accent);
+  color: var(--secondary);
+}
+
+.brown-link {
+  color: var(--brown) !important;
+  background: transparent !important;
+  font-weight: bold;
+}
+
+.brown-link:hover {
+  background: var(--accent) !important;
+  color: var(--brown) !important;
+}
+
+/* Container and content */
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: var(--spacing);
+}
+
+.about-content h1 {
+  margin-top: 0;
+}
+
+/* Back button */
+.back-btn {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 10px 28px;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  transition: background 0.2s, color 0.2s;
+}
+
+.back-btn:hover {
+  background: var(--accent);
+  color: var(--secondary);
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .container {
+    margin: 12px;
+    padding: 10px;
+  }
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .main-title {
+    font-size: 2rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+}
