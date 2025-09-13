@@ -11,20 +11,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Configuration
 public class SecurityConfig {
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/js/**", "/css/**", "/images/**", "/login.html", "/", "/index.html",
-                                "/api/pets/**", "/category.html", "/pet-details.html", "/about.html").permitAll()
-                        .requestMatchers("/application.html").authenticated()
+                        // Frontend pages & static assets stay fully public
+                        .requestMatchers(
+                                "/", "/index.html", "/category.html", "/pet-details.html", "/about.html",
+                                "/application.html", // keep accessible but backend API will protect sensitive data
+                                "/js/**", "/css/**", "/images/**",
+                                "/login.html"
+                        ).permitAll()
+
+                        // Protect only sensitive APIs
                         .requestMatchers("/api/applications/my", "/api/applications/me").authenticated()
+
+                        // All other APIs are public
                         .requestMatchers("/api/applications/**").permitAll()
                         .requestMatchers("/user").permitAll()
+
+                        // Any other request is allowed
                         .anyRequest().permitAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
+                        // Redirect after successful login
                         .defaultSuccessUrl("/myApplications.html", false)
                 )
                 .logout(logout -> logout
@@ -33,6 +45,7 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                 );
+
         return http.build();
     }
 

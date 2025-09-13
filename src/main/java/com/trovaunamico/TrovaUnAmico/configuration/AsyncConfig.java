@@ -1,0 +1,10 @@
+package com.trovaunamico.TrovaUnAmico.configuration;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
+
+@Configuration
+@EnableAsync
+public class AsyncConfig {
+    // No methods needed, @EnableAsync automatically enables async support
+}
