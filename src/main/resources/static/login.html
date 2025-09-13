@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Trova un Amico</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .login-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(44,62,80,0.10);
+            max-width: 340px;
+            margin: 60px auto 0 auto;
+            padding: 32px 28px 28px 28px;
+            text-align: center;
+        }
+        .login-title {
+            color: var(--primary);
+            margin-bottom: 18px;
+            font-size: 2rem;
+        }
+        .login-btn {
+            background: var(--accent);
+            color: var(--secondary);
+            border: none;
+            border-radius: var(--radius);
+            padding: 10px 28px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            margin-top: 18px;
+        }
+        .login-btn:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+        .login-img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 18px;
+            background: #f7f7f7;
+        }
+    </style>
+</head>
+<body>
+<div class="top-bar">
+    <div class="top-left">
+        <span class="main-title brown">Trova un Amico</span>
+        <span class="subtitle">Adopt your next pet</span>
+    </div>
+</div>
+<div class="container">
+    <div class="login-card">
+        <img src="images/max.jpeg" alt="Dog" class="login-img">
+        <div class="login-title">Login</div>
+        <a id="google-login-link" href="/oauth2/authorization/google?redirect_uri=index.html">
+            <button class="login-btn">Login with Google</button>
+        </a>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const params = new URLSearchParams(window.location.search);
+        const redirect = params.get('redirect') || 'index.html';
+        const loginLink = document.getElementById('google-login-link');
+        if (loginLink) {
+            loginLink.href = `/oauth2/authorization/google?redirect_uri=${encodeURIComponent(redirect)}`;
+        }
+    });
+</script>
+</body>
+</html>
