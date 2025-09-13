@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 
-    @Value("${spring.sendgrid.api-key}")
+    @Value("${SPRING_SENDGRID_API_KEY}")
     private String sendGridApiKey;
 
-    @Value("${spring.sendgrid.sender-email}")
+    @Value("${SPRING_SENDGRID_SENDER_EMAIL}")
     private String senderEmail;
 
 
