@@ -1,4 +1,4 @@
-Trovaunamicoè un sistema di adozione animali chiamato TrovaUnAmico, 
+Trovaunamico è un sistema di adozione animali, 
 che permette agli utenti di visualizzare gli animali per categoria, filtrare i risultati, inviare moduli di richiesta di adozione e vedere le proprie domande.
 - Java 17+
 - Spring Boot
