@@ -17,27 +17,27 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
-                        // Frontend pages & static assets stay fully public
+
                         .requestMatchers(
                                 "/", "/index.html", "/category.html", "/pet-details.html", "/about.html",
-                                "/application.html", // keep accessible but backend API will protect sensitive data
+                                "/application.html",
                                 "/js/**", "/css/**", "/images/**",
                                 "/login.html"
                         ).permitAll()
 
-                        // Protect only sensitive APIs
+
                         .requestMatchers("/api/applications/my", "/api/applications/me").authenticated()
 
-                        // All other APIs are public
+
                         .requestMatchers("/api/applications/**").permitAll()
                         .requestMatchers("/user").permitAll()
 
-                        // Any other request is allowed
+
                         .anyRequest().permitAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        // Redirect after successful login
-                        .defaultSuccessUrl("/myApplications.html", false)
+
+                        .defaultSuccessUrl("/myApplications.html", true)
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")

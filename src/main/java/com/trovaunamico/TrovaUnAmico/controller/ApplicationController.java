@@ -99,3 +99,4 @@ public class ApplicationController {
         return ResponseEntity.ok(principal.getAttributes());
     }
 }
+//remember ko u have to write which api are front end others not

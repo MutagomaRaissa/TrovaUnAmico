@@ -1,4 +1,4 @@
-// TrovaUnAmico/src/main/resources/static/js/pet-details.js
+
 document.addEventListener('DOMContentLoaded', async () => {
     const detailsDiv = document.getElementById('pet-details');
     const params = new URLSearchParams(window.location.search);

@@ -6,5 +6,5 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @Configuration
 @EnableAsync
 public class AsyncConfig {
-    // No methods needed, @EnableAsync automatically enables async support
+
 }

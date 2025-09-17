@@ -22,7 +22,7 @@ private static final Logger logger = LoggerFactory.getLogger(PetController.class
 
         this.petService = petService;
     }
-//frontend user
+
     @GetMapping
     public ResponseEntity<List<Pet>> getAllPets() {
      logger.info("Get request for all pets");
@@ -30,7 +30,7 @@ private static final Logger logger = LoggerFactory.getLogger(PetController.class
      logger.info("Fetched all {} pets", pets.size());
         return ResponseEntity.ok(pets);
     }
- //frontend admin
+
 
     @GetMapping("/{id}")
      public ResponseEntity<Pet> getPetById(@PathVariable Long id) {
@@ -44,7 +44,7 @@ private static final Logger logger = LoggerFactory.getLogger(PetController.class
        return ResponseEntity.ok(Pet.Category.values());
     }
 
-// frontend user
+
 
     @GetMapping("/category/{category}")
     public ResponseEntity <List<Pet>> getPetByCategory(@PathVariable Pet.Category category) {
@@ -53,7 +53,7 @@ private static final Logger logger = LoggerFactory.getLogger(PetController.class
        logger.info("Fetched {} pets", pets.size());
        return ResponseEntity.ok(pets);
     }
-//frontend admin
+
     @PostMapping
     public ResponseEntity<Pet> addPet(@RequestBody Pet pet) {
         logger.info("Adding new pet {}", pet);
@@ -61,7 +61,7 @@ private static final Logger logger = LoggerFactory.getLogger(PetController.class
         logger.info("Created pet {}", createPet);
         return ResponseEntity.ok(createPet);
     }
-//frontend admin
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody Pet pet) {
@@ -71,7 +71,7 @@ private static final Logger logger = LoggerFactory.getLogger(PetController.class
      return ResponseEntity.ok(existingPet);
     }
 
-//frontend admin
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePet(@PathVariable Long id) {
         logger.info("Deleting pet {}", id);
@@ -79,7 +79,7 @@ private static final Logger logger = LoggerFactory.getLogger(PetController.class
         logger.info("Deleted pet {}", id);
         return ResponseEntity.noContent().build();
     }
-    //frontend user
+
     @GetMapping("/category/{category}/filter")
     public ResponseEntity<List<Pet>> getPetsByCategoryWithFilters(
             @PathVariable Pet.Category category,

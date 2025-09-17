@@ -1,6 +1,6 @@
 const API_BASE = "/api";
 
-/** PET APIs **/
+
 const PetAPI = {
     getAllPets: async () => (await fetch(`${API_BASE}/pets`)).json(),
     getPetById: async (id) => (await fetch(`${API_BASE}/pets/${id}`)).json(),
@@ -16,7 +16,7 @@ const PetAPI = {
     }
 };
 
-/** APPLICATION APIs **/
+
 const ApplicationAPI = {
     async saveApplication(petId, appData) {
         const res = await fetch(`${API_BASE}/applications/pet/${petId}`, {
