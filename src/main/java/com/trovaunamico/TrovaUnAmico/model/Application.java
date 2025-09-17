@@ -13,12 +13,22 @@ import java.time.LocalDateTime;
 public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "application_id")
     private Long applicationId;
 
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "phone_number")
     private String phoneNumber;
+
+    @Column(name = "city")
     private String city;
 
     @Column(length = 1000)
@@ -28,16 +38,17 @@ public class Application {
     @JoinColumn(name = "pet_id", nullable = false)
     private Pet pet;
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(columnDefinition = "varchar(20) default 'NEW'")
     @Enumerated(EnumType.STRING)
+    @Column(name = "status", columnDefinition = "varchar(20) default 'NEW'")
     private ApplicationStatus status = ApplicationStatus.NEW;
 
     public enum ApplicationStatus {
         NEW,
         IN_REVIEW,
         ACCEPTED
-
     }
 }
+

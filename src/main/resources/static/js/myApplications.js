@@ -1,4 +1,4 @@
-// TrovaUnAmico/src/main/resources/static/js/myApplications.js
+
 document.addEventListener('DOMContentLoaded', async () => {
     const loginMsg = document.getElementById('login-message');
     const appList = document.getElementById('application-list');

@@ -1,4 +1,4 @@
-// TrovaUnAmico/src/main/resources/static/js/application.js
+
 document.addEventListener('DOMContentLoaded', async function() {
     const loginMsg = document.getElementById('login-message');
     const formContainer = document.getElementById('application-form-container');
