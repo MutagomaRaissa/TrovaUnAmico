@@ -79,10 +79,10 @@ resource "google_compute_instance" "trovaunamico_vm" {
         environment:
           SPRING_DATASOURCE_URL: jdbc:postgresql://amico_db:5432/postgres
           SPRING_DATASOURCE_USERNAME: postgres
-          SPRING_DATASOURCE_PASSWORD: ${var.db_password}
-          GOOGLE_CLIENT_ID: 336141363392-32g4dbjqcmtejtes3cji061aucn9upab.apps.googleusercontent.com
-          GOOGLE_CLIENT_SECRET: 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
-          SPRING_SENDGRID_API_KEY: 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
+          SPRING_DATASOURCE_PASSWORD: var.db_password
+          GOOGLE_CLIENT_ID:var.google_client_id
+          GOOGLE_CLIENT_SECRET:var.google_client_secret
+          SPRING_SENDGRID_API_KEY:var.sendgrid_api_key
           SPRING_SENDGRID_SENDER_EMAIL: "noreply.trovaunamico@gmail.com"
         ports:
           - "8080:8080"
