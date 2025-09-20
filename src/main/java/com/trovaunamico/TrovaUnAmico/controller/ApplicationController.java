@@ -2,6 +2,7 @@
 package com.trovaunamico.TrovaUnAmico.controller;
 
 import com.trovaunamico.TrovaUnAmico.model.Application;
+import com.trovaunamico.TrovaUnAmico.model.ApplicationDTO;
 import com.trovaunamico.TrovaUnAmico.service.ApplicationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,17 +51,40 @@ public class ApplicationController {
         return ResponseEntity.ok(updatedApplication);
     }
 
+//    @PostMapping("/pet/{petId}")
+//    public ResponseEntity<Application> saveApplication(
+//            @PathVariable Long petId,
+//            @RequestBody Application application,
+//            @AuthenticationPrincipal OAuth2User principal) {
+//        if (principal == null) return ResponseEntity.status(401).build();
+//        String email = principal.getAttribute("email");
+//        application.setEmail(email);
+//        Application newApplication = applicationService.saveApplication(petId, application);
+//        return ResponseEntity.ok(newApplication);
+//    }
+
+
     @PostMapping("/pet/{petId}")
-    public ResponseEntity<Application> saveApplication(
+    public ResponseEntity<?> saveApplication(
             @PathVariable Long petId,
-            @RequestBody Application application,
+            @RequestBody ApplicationDTO dto,
             @AuthenticationPrincipal OAuth2User principal) {
-        if (principal == null) return ResponseEntity.status(401).build();
-        String email = principal.getAttribute("email");
-        application.setEmail(email);
-        Application newApplication = applicationService.saveApplication(petId, application);
-        return ResponseEntity.ok(newApplication);
+
+        if (principal == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in");
+        }
+
+        try {
+            Application application = applicationService.saveApplicationFromDTO(petId, dto, principal.getAttribute("email"));
+            return ResponseEntity.ok(application);
+        } catch (RuntimeException e) {
+            logger.error("Error saving application: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
+
+
+
 
     @GetMapping("/pet/{petId}")
     public ResponseEntity<List<Application>> getApplicationsByPetId(@PathVariable Long petId) {

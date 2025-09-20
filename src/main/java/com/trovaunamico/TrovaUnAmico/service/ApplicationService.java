@@ -1,6 +1,7 @@
 package com.trovaunamico.TrovaUnAmico.service;
 
 import com.trovaunamico.TrovaUnAmico.model.Application;
+import com.trovaunamico.TrovaUnAmico.model.ApplicationDTO;
 import com.trovaunamico.TrovaUnAmico.model.Pet;
 import com.trovaunamico.TrovaUnAmico.repository.ApplicationRepository;
 import com.trovaunamico.TrovaUnAmico.repository.PetRepository;
@@ -31,31 +32,53 @@ public class ApplicationService {
     }
 
 //to save application, first find by id  if the pet exists, then save the pet in the app, send email to confirm application  was received
+//
+//    public Application saveApplication(Long petId, Application application) {
+//        logger.info("Saving new application for petId: {}", petId);
+////finding pet
+//        Pet pet = petRepository.findById(petId)
+//                .orElseThrow(() -> {
+//                    logger.error("Pet not found with id {}", petId);
+//                    return new RuntimeException("Pet not found");
+//                });
+//        logger.info("Pet found with id: {}", petId);
+//        application.setPet(pet);
+//        application.setCreatedAt(LocalDateTime.now());
+//        application.setStatus(Application.ApplicationStatus.NEW);
+//        Application newApplication = applicationRepository.save(application);
+//
+//        try {
+//            sendConfirmationEmail(newApplication);
+//        } catch (Exception e) {
+//            logger.error("Failed to send confirmation email  for application {}: {}", newApplication.getApplicationId(), e.getMessage());
+//        }
+//
+//    logger.info("Application {} saved successfully for pet {}", newApplication.getApplicationId(), petId);
+//    return newApplication;
+//}
 
-    public Application saveApplication(Long petId, Application application) {
-        logger.info("Saving new application for petId: {}", petId);
-//finding pet
-        Pet pet = petRepository.findById(petId)
-                .orElseThrow(() -> {
-                    logger.error("Pet not found with id {}", petId);
-                    return new RuntimeException("Pet not found");
-                });
-        logger.info("Pet found with id: {}", petId);
-        application.setPet(pet);
-        application.setCreatedAt(LocalDateTime.now());
-        application.setStatus(Application.ApplicationStatus.NEW);
-        Application newApplication = applicationRepository.save(application);
+public Application saveApplicationFromDTO(Long petId, ApplicationDTO dto, String email) {
+    logger.info("Saving application for petId {} by user {}", petId, email);
 
-        try {
-            sendConfirmationEmail(newApplication);
-        } catch (Exception e) {
-            logger.error("Failed to send confirmation email  for application {}: {}", newApplication.getApplicationId(), e.getMessage());
-        }
+    Pet pet = petRepository.findById(petId)
+            .orElseThrow(() -> new RuntimeException("Pet not found with id " + petId));
 
-    logger.info("Application {} saved successfully for pet {}", newApplication.getApplicationId(), petId);
-    return newApplication;
+    Application application = new Application();
+    application.setPet(pet);
+    application.setFirstName(dto.getFirstName());
+    application.setLastName(dto.getLastName());
+    application.setPhoneNumber(dto.getPhoneNumber());
+    application.setCity(dto.getCity());
+    application.setDescription(dto.getDescription());
+    application.setEmail(email);
+    application.setCreatedAt(LocalDateTime.now());
+    application.setStatus(Application.ApplicationStatus.NEW);
+
+    Application savedApplication = applicationRepository.save(application);
+
+    logger.info("Application {} saved successfully", savedApplication.getApplicationId());
+    return savedApplication;
 }
-
 
 
 

@@ -1,0 +1,12 @@
+
+target/
+!target/*.jar   # but DO keep the final JAR for Docker
+.git
+.gitignore
+.idea
+*.iml
+.vscode
+*.log
+.DS_Store
+Thumbs.db
+.env

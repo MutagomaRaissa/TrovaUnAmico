@@ -1,29 +1,34 @@
-package com.trovaunamico.TrovaUnAmico;
+package com.trovaunamico;
 
-import com.trovaunamico.TrovaUnAmico.model.Application;
-import com.trovaunamico.TrovaUnAmico.model.Pet;
-import com.trovaunamico.TrovaUnAmico.repository.ApplicationRepository;
-import com.trovaunamico.TrovaUnAmico.repository.PetRepository;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
-
-import java.time.LocalDateTime;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 @EnableAsync
 public class TrovaUnAmicoApplication {
 private static final Logger logger = LoggerFactory.getLogger(TrovaUnAmicoApplication.class);
 	public static void main(String[] args) {
+
         SpringApplication.run(TrovaUnAmicoApplication.class, args);
         logger.info("Application started successfully");
 
 	}
+    @Component
+    public class EnvTest {
+        @Value("${SPRING_SENDGRID_API_KEY}")
+        private String sendGridApiKey;
+
+        @PostConstruct
+        public void printKey() {
+            System.out.println("SendGrid API Key: " + sendGridApiKey);
+        }
+    }
 //    @Bean
 //    public CommandLineRunner init(PetRepository petRepository, ApplicationRepository applicationRepository) {
 //        return args -> {
