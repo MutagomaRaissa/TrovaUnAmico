@@ -7,8 +7,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://34.154.246.198:5432/trovaunamico
+      SPRING_DATASOURCE_URL: jdbc:postgresql://IP/trovaunamico
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: Bossboss2k!
+      SPRING_DATASOURCE_PASSWORD: PASSWORD
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     restart: unless-stopped
+
